@@ -9,6 +9,7 @@ import com.travel.ticket.entity.PortResult;
 import com.travel.ticket.util.DebugUtil;
 import com.travel.ticket.util.HttpClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,6 +36,7 @@ public class PortListActivity extends BaseActivity{
         ButterKnife.bind(this);
         initView();
         getAllPort();
+        getAllShip();
     }
 
     private void initView() {
@@ -42,9 +44,48 @@ public class PortListActivity extends BaseActivity{
         rvPorts.setLayoutManager(mLinearLayoutManager);
         PortAdapter adapter = new PortAdapter();
         rvPorts.setAdapter(adapter);
+        adapter.addData(initData());
+    }
+
+    private List<PortResult> initData(){
+        List<PortResult> list = new ArrayList<>();
+        list.add(new PortResult());
+        list.add(new PortResult());
+        list.add(new PortResult());
+        list.add(new PortResult());
+        list.add(new PortResult());
+        return list;
     }
 
     private void getAllPort() {
+        Subscription subscription = HttpClient.Builder.getTravelService().docker().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<PortResult>>() {
+                    @Override
+                    public void onCompleted() {
+                        dismiss();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismiss();
+                        DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
+
+                    }
+
+                    @Override
+                    public void onNext(List<PortResult> result) {
+                        if(result != null){
+                            DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
+                        }else {
+                            DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
+                        }
+                    }
+                });
+        addSubscription(subscription);
+
+    }
+
+    private void getAllShip() {
         Subscription subscription = HttpClient.Builder.getTravelService().docker().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<PortResult>>() {
                     @Override
