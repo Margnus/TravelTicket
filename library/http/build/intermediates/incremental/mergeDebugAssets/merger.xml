@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="F:\workspaces\TravelTickets\library\http\src\main\assets"/><source path="F:\workspaces\TravelTickets\library\http\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="F:\workspaces\TravelTickets\library\http\src\debug\assets"/></dataSet></merger>

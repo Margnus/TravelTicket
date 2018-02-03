@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.travel.ticket.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textSize="18dp"
+        android:gravity="center"
+        android:text="账号"/>
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBaseline="@+id/tv_name"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_psw"
+        android:layout_width="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/tv_name"
+        android:textSize="18dp"
+        android:gravity="center"
+        android:text="密码"/>
+
+    <EditText
+        android:id="@+id/et_psw"
+        android:layout_toRightOf="@+id/tv_psw"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBaseline="@+id/tv_psw"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/commit"
+        android:text="登录"
+        android:layout_below="@+id/tv_psw"
+        android:layout_margin="50dp"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
