@@ -36,8 +36,9 @@ public class HttpUtils {
     private Gson gson;
     private Context context;
     private Object travelHttps;
-    private IpmlTokenGetListener listener;
     private boolean debug;
+
+    private Interceptor mInterceptor;
 
     private final static String API_TRAVEL = "http://travel.5det.com/";
     /**
@@ -57,9 +58,10 @@ public class HttpUtils {
         return instance;
     }
 
-    public void init(Context context, boolean debug) {
+    public void init(Context context, Interceptor interceptor, boolean debug) {
         this.context = context;
         this.debug = debug;
+        this.mInterceptor = interceptor;
         HttpHead.init(context);
     }
 
@@ -129,7 +131,9 @@ public class HttpUtils {
             okBuilder.readTimeout(20, TimeUnit.SECONDS);
             okBuilder.connectTimeout(10, TimeUnit.SECONDS);
             okBuilder.writeTimeout(20, TimeUnit.SECONDS);
-            okBuilder.addInterceptor(new HttpHeadInterceptor());
+            if(mInterceptor != null){
+                okBuilder.addInterceptor(mInterceptor);
+            }
             okBuilder.addInterceptor(getInterceptor());
             okBuilder.sslSocketFactory(sslSocketFactory);
             okBuilder.hostnameVerifier(new HostnameVerifier() {
@@ -153,34 +157,6 @@ public class HttpUtils {
         return client1;
     }
 
-    public void setTokenListener(IpmlTokenGetListener listener) {
-        this.listener = listener;
-    }
-
-
-    class HttpHeadInterceptor implements Interceptor {
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            Request.Builder builder = request.newBuilder();
-            builder.addHeader("Accept", "application/json;versions=1");
-            if (CheckNetwork.isNetworkConnected(context)) {
-                int maxAge = 60;
-                builder.addHeader("Cache-Control", "public, max-age=" + maxAge);
-            } else {
-                int maxStale = 60 * 60 * 24 * 28;
-                builder.addHeader("Cache-Control", "public, only-if-cached, max-stale=" + maxStale);
-            }
-            // 可添加token
-//            if (listener != null) {
-//                builder.addHeader("token", listener.getToken());
-//            }
-            // 如有需要，添加请求头
-//            builder.addHeader("a", HttpHead.getHeader(request.method()));
-            return chain.proceed(builder.build());
-        }
-    }
-
     private HttpLoggingInterceptor getInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         if (debug) {
@@ -189,5 +165,9 @@ public class HttpUtils {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 打包
         }
         return interceptor;
+    }
+
+    public void setInterceptor(Interceptor interceptor){
+        mInterceptor = interceptor;
     }
 }

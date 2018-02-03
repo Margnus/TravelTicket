@@ -3,22 +3,24 @@ package com.travel.ticket.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.travel.ticket.TravelApplication;
+
 public class PreferenceUtil {
 
     private static PreferenceUtil mInstance;
 
-    private PreferenceUtil(Context context) {
-        init(context);
+    private PreferenceUtil() {
+        init(TravelApplication.getInstance());
     }
 
-    public static PreferenceUtil getInstance(Context context) {
+    public static PreferenceUtil getInstance() {
         if (mInstance == null) {
             synchronized (PreferenceUtil.class) {
                 if (mInstance == null) {
-                    mInstance = new PreferenceUtil(context);
+                    mInstance = new PreferenceUtil();
                 }
             }
-            mInstance.init(context);
+            mInstance.init(TravelApplication.getInstance());
         }
         return mInstance;
     }

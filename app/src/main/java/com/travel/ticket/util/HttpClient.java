@@ -2,6 +2,7 @@ package com.travel.ticket.util;
 
 import com.example.http.HttpUtils;
 import com.travel.ticket.entity.DepartureBean;
+import com.travel.ticket.entity.PortResult;
 import com.travel.ticket.entity.StringBean;
 import com.travel.ticket.entity.TokenBean;
 
@@ -120,5 +121,13 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("sys/checking/{ticketNo}/ticket")
     Observable<StringBean> ticketNo(@Path("ticketNo") String ship);
+
+    /**
+     * 获取全部码头id
+     *
+     * @return
+     */
+    @GET("sys/checking/my/docker")
+    Observable<List<PortResult>> docker();
 
 }

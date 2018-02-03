@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 
 import com.example.http.HttpUtils;
+import com.travel.ticket.http.HttpHeadInterceptor;
 import com.travel.ticket.util.DebugUtil;
 
 /**
@@ -24,7 +25,7 @@ public class TravelApplication extends Application {
     public void onCreate() {
         super.onCreate();
         travelApplication = this;
-        HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
+        HttpUtils.getInstance().init(this, new HttpHeadInterceptor(), DebugUtil.DEBUG);
 
         initTextSize();
     }

@@ -1,5 +1,6 @@
 package com.travel.ticket;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -43,6 +44,14 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        checkToken();
+    }
+
+    private void checkToken() {
+        if(!TextUtils.isEmpty(PreferenceUtil.getInstance().getString(TokenBean.ACCESS_TOKEN, ""))){
+            startActivity(new Intent(MainActivity.this, PortListActivity.class));
+            finish();
+        }
     }
 
     private void login(String name, String psw) {
@@ -76,12 +85,14 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onNext(TokenBean result) {
                         if(result != null){
-                            PreferenceUtil preferenceUtil = PreferenceUtil.getInstance(getApplicationContext());
+                            PreferenceUtil preferenceUtil = PreferenceUtil.getInstance();
                             preferenceUtil.saveString(TokenBean.ACCESS_TOKEN, result.getAccessToken());
                             preferenceUtil.saveString(TokenBean.REFRESH_TOKEN, result.getRefreshToken());
                             preferenceUtil.saveString(TokenBean.TOKEN_TYPE, result.getTokenType());
                             preferenceUtil.saveInt(TokenBean.EXPIRES_IN, result.getExpiresIn());
                             DebugUtil.toast(MainActivity.this, "登录成功~");
+                            startActivity(new Intent(MainActivity.this, PortListActivity.class));
+                            finish();
                         }else {
                             DebugUtil.toast(MainActivity.this, "网络连接失败，请检查网络设置~");
                         }
