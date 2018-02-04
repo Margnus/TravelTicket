@@ -52,7 +52,7 @@ public interface HttpClient {
      * @param cruisePlanId
      * @return
      */
-    @GET("sys/checking/today/departure")
+    @GET("api/sys/checking/today/departure")
     Observable<List<DepartureBean>> getDeparture(@Query("dockerId") String dockerId, @Query("cruiseId") String cruiseId,
                                                  @Query("from") int from, @Query("to") int to,
                                                  @Query("corporationId") String corporationId, @Query("cruisePlanId") String cruisePlanId);
@@ -66,7 +66,7 @@ public interface HttpClient {
      * @return
      */
     @FormUrlEncoded
-    @POST("sys/checking/today/departure")
+    @POST("api/sys/checking/today/departure")
     Observable<List<DepartureBean>> postDeparture(@Field("dockerId") String dockerId, @Field("cruiseId") String cruiseId,
                                                   @Field("cruisePlanId") String cruisePlanId);
 
@@ -77,7 +77,7 @@ public interface HttpClient {
      * @return
      */
     @FormUrlEncoded
-    @POST("sys/checking/{carrierOfShip}/begin/checkin")
+    @POST("api/sys/checking/{carrierOfShip}/begin/checkin")
     Observable<StringBean> checkIn(@Path("carrierOfShip") String ship);
 
     /**
@@ -87,7 +87,7 @@ public interface HttpClient {
      * @return
      */
     @FormUrlEncoded
-    @POST("sys/checking/{carrierOfShip}/begin/sailing")
+    @POST("api/sys/checking/{carrierOfShip}/begin/sailing")
     Observable<StringBean> sailing(@Path("carrierOfShip") String ship);
 
     /**
@@ -97,7 +97,7 @@ public interface HttpClient {
      * @return
      */
     @FormUrlEncoded
-    @POST("POST /sys/checking/{carrierOfShip}/cancel/checkin")
+    @POST("api/sys/checking/{carrierOfShip}/cancel/checkin")
     Observable<StringBean> cancelCheckin(@Path("carrierOfShip") String ship);
 
 
@@ -108,7 +108,7 @@ public interface HttpClient {
      * @return
      */
     @FormUrlEncoded
-    @POST("sys/checking/{carrierOfShip}/cancel/sailing")
+    @POST("api/sys/checking/{carrierOfShip}/cancel/sailing")
     Observable<StringBean> cancelSailing(@Path("carrierOfShip") String ship);
 
 
@@ -119,7 +119,7 @@ public interface HttpClient {
      * @return
      */
     @FormUrlEncoded
-    @POST("sys/checking/{ticketNo}/ticket")
+    @POST("api/sys/checking/{ticketNo}/ticket")
     Observable<StringBean> ticketNo(@Path("ticketNo") String ship);
 
     /**
@@ -127,7 +127,7 @@ public interface HttpClient {
      *
      * @return
      */
-    @GET("sys/checking/my/docker")
+    @GET("api/sys/checking/my/docker")
     Observable<List<PortResult>> docker();
 
 }
