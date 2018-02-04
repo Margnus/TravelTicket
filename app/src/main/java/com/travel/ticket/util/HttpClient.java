@@ -53,9 +53,7 @@ public interface HttpClient {
      * @return
      */
     @GET("api/sys/checking/today/departure")
-    Observable<List<DepartureBean>> getDeparture(@Query("dockerId") String dockerId, @Query("cruiseId") String cruiseId,
-                                                 @Query("from") int from, @Query("to") int to,
-                                                 @Query("corporationId") String corporationId, @Query("cruisePlanId") String cruisePlanId);
+    Observable<List<DepartureBean>> getDeparture();
 
     /**
      * 获取今日出发查验航班

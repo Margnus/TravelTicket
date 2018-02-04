@@ -2,8 +2,13 @@ package com.travel.ticket;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.travel.ticket.entity.PortResult;
 import com.travel.ticket.util.DebugUtil;
@@ -25,26 +30,59 @@ import rx.schedulers.Schedulers;
 
 public class PortListActivity extends BaseActivity{
 
-    @BindView(R.id.rv_ports)
-    RecyclerView rvPorts;
+
+
+    /**tabs*/
+    @BindView(R.id.tabs)
+    TabLayout tabs;
+    /**viewpager*/
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
+
+    /** viewpage的 adapter*/
+    private Adapter mAdapter;
 
     LinearLayoutManager mLinearLayoutManager;
+
+    private List<PortResult> portResults;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ports);
         ButterKnife.bind(this);
-        initView();
+//        initView();
         getAllPort();
-        getAllShip();
+//        getAllShip();
     }
 
+//    private void initView() {
+//        mLinearLayoutManager = new LinearLayoutManager(this);
+//        rvPorts.setLayoutManager(mLinearLayoutManager);
+//        PortAdapter adapter = new PortAdapter();
+//        rvPorts.setAdapter(adapter);
+//        adapter.addData(initData());
+//    }
+
     private void initView() {
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvPorts.setLayoutManager(mLinearLayoutManager);
-        PortAdapter adapter = new PortAdapter();
-        rvPorts.setAdapter(adapter);
-        adapter.addData(initData());
+        mAdapter = new Adapter(this.getSupportFragmentManager());
+        for (int i = 0; i < portResults.size(); i++) {
+            mAdapter.addFragment(getFragment(portResults.get(i).getId()), portResults.get(i).getName());
+        }
+        viewpager.setAdapter(mAdapter);
+        viewpager.setOffscreenPageLimit(portResults.size());
+        mAdapter.notifyDataSetChanged();
+        tabs.setTabMode(TabLayout.MODE_FIXED);
+        tabs.setupWithViewPager(viewpager);
+//        viewpager.setCurrentItem(0, true);
+    }
+
+    private Fragment getFragment(String id) {
+        ShipListFragment fragment = new ShipListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     private List<PortResult> initData(){
@@ -75,7 +113,8 @@ public class PortListActivity extends BaseActivity{
                     @Override
                     public void onNext(List<PortResult> result) {
                         if(result != null){
-                            DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
+                            portResults = result;
+                            initView();
                         }else {
                             DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
                         }
@@ -111,6 +150,35 @@ public class PortListActivity extends BaseActivity{
                 });
         addSubscription(subscription);
 
+    }
+
+    protected static class Adapter extends FragmentPagerAdapter {
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<CharSequence> titles = new ArrayList<>();
+
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void addFragment(Fragment fragment, CharSequence title) {
+            fragments.add(fragment);
+            titles.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
+        }
     }
 
 
