@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TravelTicket</string>
     <string name="action_settings">Settings</string>
+    <string name="capacity">客容: %d</string>
+    <string name="checked">已检: %d</string>
+    <string name="sale">已售: %d</string>
+    <string name="logout">退出</string>
 </resources>

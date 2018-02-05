@@ -44,12 +44,6 @@ public interface HttpClient {
     /**
      * 获取今日出发查验航班
      *
-     * @param dockerId
-     * @param cruiseId
-     * @param from
-     * @param to
-     * @param corporationId
-     * @param cruisePlanId
      * @return
      */
     @GET("api/sys/checking/today/departure")
@@ -74,7 +68,6 @@ public interface HttpClient {
      * @param ship
      * @return
      */
-    @FormUrlEncoded
     @POST("api/sys/checking/{carrierOfShip}/begin/checkin")
     Observable<StringBean> checkIn(@Path("carrierOfShip") String ship);
 
@@ -84,7 +77,6 @@ public interface HttpClient {
      * @param ship
      * @return
      */
-    @FormUrlEncoded
     @POST("api/sys/checking/{carrierOfShip}/begin/sailing")
     Observable<StringBean> sailing(@Path("carrierOfShip") String ship);
 
@@ -94,7 +86,6 @@ public interface HttpClient {
      * @param ship
      * @return
      */
-    @FormUrlEncoded
     @POST("api/sys/checking/{carrierOfShip}/cancel/checkin")
     Observable<StringBean> cancelCheckin(@Path("carrierOfShip") String ship);
 
@@ -105,18 +96,16 @@ public interface HttpClient {
      * @param ship
      * @return
      */
-    @FormUrlEncoded
     @POST("api/sys/checking/{carrierOfShip}/cancel/sailing")
     Observable<StringBean> cancelSailing(@Path("carrierOfShip") String ship);
 
 
     /**
-     * 发航
+     * 票号查验
      *
      * @param ship
      * @return
      */
-    @FormUrlEncoded
     @POST("api/sys/checking/{ticketNo}/ticket")
     Observable<StringBean> ticketNo(@Path("ticketNo") String ship);
 

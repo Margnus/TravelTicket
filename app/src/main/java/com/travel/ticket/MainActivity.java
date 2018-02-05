@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.travel.ticket.entity.TokenBean;
+import com.travel.ticket.util.AccountUtil;
 import com.travel.ticket.util.DebugUtil;
 import com.travel.ticket.util.HttpClient;
 import com.travel.ticket.util.PreferenceUtil;
@@ -85,11 +86,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onNext(TokenBean result) {
                         if(result != null){
-                            PreferenceUtil preferenceUtil = PreferenceUtil.getInstance();
-                            preferenceUtil.saveString(TokenBean.ACCESS_TOKEN, result.getAccessToken());
-                            preferenceUtil.saveString(TokenBean.REFRESH_TOKEN, result.getRefreshToken());
-                            preferenceUtil.saveString(TokenBean.TOKEN_TYPE, result.getTokenType());
-                            preferenceUtil.saveInt(TokenBean.EXPIRES_IN, result.getExpiresIn());
+                            AccountUtil.login(result);
                             DebugUtil.toast(MainActivity.this, "登录成功~");
                             startActivity(new Intent(MainActivity.this, PortListActivity.class));
                             finish();

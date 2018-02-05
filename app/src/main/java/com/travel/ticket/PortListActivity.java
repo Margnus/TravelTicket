@@ -1,5 +1,8 @@
 package com.travel.ticket;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -9,8 +12,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.travel.ticket.entity.PortResult;
+import com.travel.ticket.util.AccountUtil;
 import com.travel.ticket.util.DebugUtil;
 import com.travel.ticket.util.HttpClient;
 
@@ -28,18 +35,23 @@ import rx.schedulers.Schedulers;
  * Created by 李小凡 on 2018/2/2.
  */
 
-public class PortListActivity extends BaseActivity{
+public class PortListActivity extends BaseActivity {
 
 
-
-    /**tabs*/
+    /**
+     * tabs
+     */
     @BindView(R.id.tabs)
     TabLayout tabs;
-    /**viewpager*/
+    /**
+     * viewpager
+     */
     @BindView(R.id.viewpager)
     ViewPager viewpager;
 
-    /** viewpage的 adapter*/
+    /**
+     * viewpage的 adapter
+     */
     private Adapter mAdapter;
 
     LinearLayoutManager mLinearLayoutManager;
@@ -85,7 +97,7 @@ public class PortListActivity extends BaseActivity{
         return fragment;
     }
 
-    private List<PortResult> initData(){
+    private List<PortResult> initData() {
         List<PortResult> list = new ArrayList<>();
         list.add(new PortResult());
         list.add(new PortResult());
@@ -112,10 +124,10 @@ public class PortListActivity extends BaseActivity{
 
                     @Override
                     public void onNext(List<PortResult> result) {
-                        if(result != null){
+                        if (result != null) {
                             portResults = result;
                             initView();
-                        }else {
+                        } else {
                             DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
                         }
                     }
@@ -141,9 +153,9 @@ public class PortListActivity extends BaseActivity{
 
                     @Override
                     public void onNext(List<PortResult> result) {
-                        if(result != null){
+                        if (result != null) {
                             DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
-                        }else {
+                        } else {
                             DebugUtil.toast(PortListActivity.this, "网络连接失败，请检查网络设置~");
                         }
                     }
@@ -182,4 +194,44 @@ public class PortListActivity extends BaseActivity{
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                showLogoutDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showLogoutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("确定要退出登录吗？");
+        builder.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                AccountUtil.logout();
+                Intent intent = new Intent(PortListActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.create().show();
+    }
 }
