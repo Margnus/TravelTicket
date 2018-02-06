@@ -57,27 +57,31 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
                 .setText(R.id.ship_name, item.getCruise().getName())
                 .setText(R.id.capacity, mContext.getString(R.string.capacity, item.getCapacity()))
                 .setText(R.id.check, mContext.getString(R.string.checked, item.getCheckIn()))
-                .setText(R.id.sale, mContext.getString(R.string.sale, item.getCheckIn()));
+                .setText(R.id.sale, mContext.getString(R.string.sale, item.getSold()));
         switch (item.getSailingStatus()){
             case "stay":
                 helper.setVisible(R.id.checkin, true);
                 helper.setVisible(R.id.sailing, false);
                 helper.setText(R.id.checkin, "查验");
+                helper.setText(R.id.status, "待查验");
                 break;
             case "checking":
                 helper.setVisible(R.id.checkin, true);
                 helper.setVisible(R.id.sailing, true);
                 helper.setText(R.id.checkin, "取消查验");
                 helper.setText(R.id.sailing, "发航");
+                helper.setText(R.id.status, "待发航");
                 break;
             case "sailing":
                 helper.setVisible(R.id.checkin, false);
                 helper.setVisible(R.id.sailing, true);
                 helper.setText(R.id.sailing, "取消发航");
+                helper.setText(R.id.status, "已发航");
                 break;
             case "end":
                 helper.setVisible(R.id.checkin, false);
                 helper.setVisible(R.id.sailing, false);
+                helper.setText(R.id.status, "已发航");
                 break;
         }
         helper.getView(R.id.checkin).setOnClickListener(new View.OnClickListener() {

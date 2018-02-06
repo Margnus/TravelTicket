@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
 
     private void checkToken() {
         if(!TextUtils.isEmpty(PreferenceUtil.getInstance().getString(TokenBean.ACCESS_TOKEN, ""))){
-            startActivity(new Intent(MainActivity.this, PortListActivity.class));
+            startActivity(new Intent(MainActivity.this, DepartureListActivity.class));
             finish();
         }
     }
@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
                         if(result != null){
                             AccountUtil.login(result);
                             DebugUtil.toast(MainActivity.this, "登录成功~");
-                            startActivity(new Intent(MainActivity.this, PortListActivity.class));
+                            startActivity(new Intent(MainActivity.this, DepartureListActivity.class));
                             finish();
                         }else {
                             DebugUtil.toast(MainActivity.this, "网络连接失败，请检查网络设置~");

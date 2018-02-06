@@ -24,6 +24,7 @@ public class DepartureBean implements Serializable{
      * loop : true
      * operator : string
      * sailingStatus : sailing
+     * sold : 0
      */
 
     @SerializedName("capacity")
@@ -52,6 +53,16 @@ public class DepartureBean implements Serializable{
     private String operator;
     @SerializedName("sailingStatus")
     private String sailingStatus;
+    @SerializedName("sold")
+    private int sold;
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
 
     public int getCapacity() {
         return capacity;
