@@ -50,5 +50,7 @@ android {
 
         compile 'com.jakewharton:butterknife:8.8.1'
         annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+        compile 'com.google.zxing:core:3.2.1'      //zxing核心依赖
+        compile 'com.journeyapps:zxing-android-embedded:3.3.0'
     }
 }

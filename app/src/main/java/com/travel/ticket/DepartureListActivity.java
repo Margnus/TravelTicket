@@ -17,10 +17,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.travel.ticket.entity.DepartureBean;
+import com.travel.ticket.entity.StringBean;
 import com.travel.ticket.util.AccountUtil;
 import com.travel.ticket.util.DebugUtil;
 import com.travel.ticket.util.HttpClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +38,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -74,7 +86,7 @@ public class DepartureListActivity extends BaseActivity {
         recyclerView.setAdapter(portAdapter);
     }
 
-    private void initSpinner(String[] mItems){
+    private void initSpinner(String[] mItems) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -95,7 +107,7 @@ public class DepartureListActivity extends BaseActivity {
     }
 
     private void getDeparture(boolean showDialog) {
-        if(showDialog){
+        if (showDialog) {
             showDialog();
         }
         Subscription subscription = HttpClient.Builder.getTravelService().getDeparture().subscribeOn(Schedulers.io())
@@ -127,13 +139,13 @@ public class DepartureListActivity extends BaseActivity {
     /**
      * 筛选码头
      */
-    private void shortData(){
+    private void shortData() {
         ports.clear();
         maps.clear();
-        for(DepartureBean bean : departureBeans){
-            if(maps.containsKey(bean.getDocker().getName())){
+        for (DepartureBean bean : departureBeans) {
+            if (maps.containsKey(bean.getDocker().getName())) {
                 maps.get(bean.getDocker().getName()).add(bean);
-            }else {
+            } else {
                 List<DepartureBean> list = new ArrayList<>();
                 list.add(bean);
                 maps.put(bean.getDocker().getName(), list);
@@ -147,7 +159,7 @@ public class DepartureListActivity extends BaseActivity {
         portAdapter.notifyDataSetChanged();
     }
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -194,6 +206,68 @@ public class DepartureListActivity extends BaseActivity {
             }
         });
         builder.create().show();
+    }
+
+    @OnClick(R.id.image)
+    public void onViewClicked() {
+        new IntentIntegrator(this)
+                .setOrientationLocked(false)
+                .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是ScanActivity
+                .initiateScan(); // 初始化扫描
+    }
+
+    @Override
+// 通过 onActivityResult的方法获取扫描回来的值
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(intentResult != null) {
+            if(intentResult.getContents() == null) {
+                Toast.makeText(this,"内容为空",Toast.LENGTH_LONG).show();
+            } else {
+                // ScanResult 为 获取到的字符串
+                String ScanResult = intentResult.getContents();
+                Toast.makeText(this,"扫描成功 ==> " + ScanResult,Toast.LENGTH_LONG).show();
+                ticketOn(ScanResult);
+            }
+        } else {
+            super.onActivityResult(requestCode,resultCode,data);
+        }
+    }
+
+    private void ticketOn(String id) {
+        showDialog();
+        HttpClient.Builder.getTravelService().ticketNo(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<StringBean>() {
+            @Override
+            public void onCompleted() {
+                dismiss();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dismiss();
+                if(e != null && e instanceof HttpException){
+                    try {
+                        String error = ((HttpException) e).response().errorBody().string();
+                        JSONObject object = new JSONObject(error);
+                        DebugUtil.toast(DepartureListActivity.this, object.getString("message"));
+                        return;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                DebugUtil.toast(DepartureListActivity.this, "网络连接失败，请检查网络设置~");
+            }
+
+            @Override
+            public void onNext(StringBean result) {
+                if (result != null) {
+                    DebugUtil.toast(DepartureListActivity.this, result.getMsg());
+                }
+            }
+        });
     }
 }
 

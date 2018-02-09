@@ -33,7 +33,7 @@
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
+                    android:spinnerMode="dropdown"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"/>
             </LinearLayout>
@@ -45,4 +45,12 @@
                 android:layout_height="match_parent" />
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="40dp"
+        android:src="@drawable/icon_circle"
+        android:layout_gravity="bottom|right"/>
 </FrameLayout>
