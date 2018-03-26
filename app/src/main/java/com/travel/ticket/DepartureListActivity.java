@@ -16,7 +16,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +33,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.travel.ticket.entity.DepartureBean;
 import com.travel.ticket.entity.MineResult;
+import com.travel.ticket.entity.MyCorpsResult;
 import com.travel.ticket.entity.StringBean;
 import com.travel.ticket.entity.UpdateResult;
 import com.travel.ticket.http.AuthObserver;
@@ -89,8 +93,64 @@ public class DepartureListActivity extends BaseActivity {
         initView();
         getMe();
 //        getDeparture(true);
+        getMyCorps();
         update();
         initScanner();
+    }
+
+    private void getMyCorps() {
+        Subscription subscription = HttpClient.Builder.getTravelService().myCorps().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new AuthObserver<MyCorpsResult>() {
+                    @Override
+                    public void onCompleted() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        dismiss();
+                        swipeRefreshLayout.setRefreshing(false);
+                        try {
+                            String error = ((HttpException) e).response().errorBody().string();
+                            JSONObject object = new JSONObject(error);
+                            DebugUtil.toast(DepartureListActivity.this, object.getString("error_description"));
+                            return;
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                        DebugUtil.toast(DepartureListActivity.this, "网络连接失败，请检查网络设置~");
+                    }
+
+                    @Override
+                    public void reLogin() {
+                        AccountUtil.logout();
+                        Intent intent = new Intent(DepartureListActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onNext(MyCorpsResult result) {
+                        if (result != null) {
+                            String name = result.getCorps().getName() + ' ' + result.getWorkDate();
+                            initToolbar(name);
+                        }
+                    }
+                });
+        addSubscription(subscription);
+    }
+
+    private void initToolbar(String title) {
+        SpannableString msp = new SpannableString(title);
+        int start = title.indexOf(" ");
+        int end = title.length();
+        //设置字体大小（绝对值,单位：像素）
+        msp.setSpan(new AbsoluteSizeSpan(16,true), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        setTitle(msp);
     }
 
     ScannerInterface scanner;
@@ -142,6 +202,7 @@ public class DepartureListActivity extends BaseActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                getMyCorps();
                 getDeparture(false);
             }
         });
@@ -444,9 +505,9 @@ public class DepartureListActivity extends BaseActivity {
                     @Override
                     public void onNext(List<DepartureBean> result) {
                         if (mineResult != null && mineResult.getPortCoporation() != null) {
-                            if (!TextUtils.isEmpty(mineResult.getPortCoporation().getName())) {
-                                setTitle(mineResult.getPortCoporation().getName());
-                            }
+//                            if (!TextUtils.isEmpty(mineResult.getPortCoporation().getName())) {
+//                                setTitle(mineResult.getPortCoporation().getName());
+//                            }
                         }
                         if (result != null) {
                             departureBeans = result;
