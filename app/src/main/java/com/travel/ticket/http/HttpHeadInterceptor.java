@@ -20,7 +20,7 @@ public class HttpHeadInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
-        builder.addHeader("Accept", "application/json;versions=1");
+        builder.addHeader("Content-type", "application/json");
         if (CheckNetwork.isNetworkConnected(TravelApplication.getInstance())) {
             int maxAge = 60;
             builder.addHeader("Cache-Control", "public, max-age=" + maxAge);
@@ -28,7 +28,8 @@ public class HttpHeadInterceptor implements Interceptor {
             int maxStale = 60 * 60 * 24 * 28;
             builder.addHeader("Cache-Control", "public, only-if-cached, max-stale=" + maxStale);
         }
-        builder.addHeader("authorization", "Bearer " + PreferenceUtil.getInstance().getString(TokenBean.ACCESS_TOKEN, ""));
+        String token = "Bearer " + PreferenceUtil.getInstance().getString(TokenBean.ACCESS_TOKEN, "");
+        builder.addHeader("authorization", token);
         return chain.proceed(builder.build());
     }
 }

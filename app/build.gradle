@@ -5,10 +5,10 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.travel.ticket"
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 24
-        versionCode 13
-        versionName "1.8.3"
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true

@@ -2,9 +2,11 @@ package com.travel.ticket.util;
 
 import com.example.http.HttpUtils;
 import com.travel.ticket.entity.DepartureBean;
+import com.travel.ticket.entity.MineResult;
 import com.travel.ticket.entity.PortResult;
 import com.travel.ticket.entity.StringBean;
 import com.travel.ticket.entity.TokenBean;
+import com.travel.ticket.entity.UpdateResult;
 
 import java.util.List;
 
@@ -13,7 +15,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import rx.Observable;
 
 public interface HttpClient {
@@ -106,8 +107,9 @@ public interface HttpClient {
      * @param ship
      * @return
      */
-    @POST("api/sys/checking/{ticketNo}/ticket")
-    Observable<StringBean> ticketNo(@Path("ticketNo") String ship);
+    @FormUrlEncoded
+    @POST("api/sys/checking/verifi/ticket")
+    Observable<StringBean> ticketNo(@Field("ticketNo") String ship);
 
     /**
      * 获取全部码头id
@@ -117,4 +119,9 @@ public interface HttpClient {
     @GET("api/sys/checking/my/docker")
     Observable<List<PortResult>> docker();
 
+    @GET("api/sys/systemAccount/me")
+    Observable<MineResult> getMine();
+
+    @GET("api/sys/version/last/pda")
+    Observable<UpdateResult> update();
 }

@@ -11,6 +11,11 @@ import java.io.Serializable;
 public class DepartureBean implements Serializable{
 
     /**
+     * "adultCheckIn": 0,
+     "capacity": 0,
+     "carrierShipId": "string",
+     "checkIn": 0,
+     "childCheckIn": 0,
      * capacity : 0
      * carrierShipId : string
      * checkIn : 0
@@ -55,6 +60,26 @@ public class DepartureBean implements Serializable{
     private String sailingStatus;
     @SerializedName("sold")
     private int sold;
+    @SerializedName("adultCheckIn")
+    private int adultCheckIn;
+    @SerializedName("childCheckIn")
+    private int childCheckIn;
+
+    public int getAdultCheckIn() {
+        return adultCheckIn;
+    }
+
+    public void setAdultCheckIn(int adultCheckIn) {
+        this.adultCheckIn = adultCheckIn;
+    }
+
+    public int getChildCheckIn() {
+        return childCheckIn;
+    }
+
+    public void setChildCheckIn(int childCheckIn) {
+        this.childCheckIn = childCheckIn;
+    }
 
     public int getSold() {
         return sold;

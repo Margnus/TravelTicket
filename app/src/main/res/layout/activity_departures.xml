@@ -13,30 +13,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/top"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#6bbfff">
+                android:gravity="center_vertical"
+                android:background="@color/looper_9">
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="当前码头："
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="码头："
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/spinner"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:spinnerMode="dropdown"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"/>
-            </LinearLayout>
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@+id/title"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:id="@+id/checked_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/checked_num"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -46,11 +62,19 @@
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_margin="40dp"
-        android:src="@drawable/icon_circle"
-        android:layout_gravity="bottom|right"/>
+        android:background="@drawable/shape_camera"
+        android:layout_gravity="bottom|right">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_circle"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
 </FrameLayout>

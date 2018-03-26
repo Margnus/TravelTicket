@@ -26,6 +26,8 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by lixiaofan on 2018/2/4.
  */
@@ -38,8 +40,6 @@ public class ShipListFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     LinearLayoutManager mLinearLayoutManager;
-
-    private String id;
 
     PortAdapter adapter;
 
@@ -59,7 +59,6 @@ public class ShipListFragment extends BaseFragment {
     }
 
     private void initView() {
-        id = getArguments().getString("id");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -68,7 +67,7 @@ public class ShipListFragment extends BaseFragment {
         });
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLinearLayoutManager);
-        adapter = new PortAdapter(handler);
+        adapter = new PortAdapter(getActivity(), handler);
         recyclerView.setAdapter(adapter);
 //        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 //            @Override

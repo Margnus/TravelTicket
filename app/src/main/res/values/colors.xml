@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#f08336</color>
+    <color name="colorPrimaryDark">#ff7200</color>
+    <color name="colorAccent">#ce0200</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="trans">#aaf08336</color>
+
+    <color name="looper_1">#50bd72</color>
+    <color name="looper_2">#ff7200</color>
+    <color name="looper_3">#6bbfff</color>
+    <color name="looper_4">#dc4c4c</color>
+    <color name="looper_5">#ce0200</color>
+    <color name="looper_6">#1E80D0</color>
+    <color name="looper_7">#64b9fa</color>
+    <color name="looper_8">#db3434</color>
+    <color name="looper_9">#ffd085</color>
+    <color name="looper_10">#e58283</color>
+    <color name="looper_11">#f08336</color>
+    <color name="looper_12">#ffff00</color>
 </resources>

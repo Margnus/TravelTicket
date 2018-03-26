@@ -62,6 +62,7 @@ public class PortListActivity extends BaseActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ports);
+        setTitle("两江游票号验证3/26");
         ButterKnife.bind(this);
 //        initView();
         getAllPort();
@@ -78,9 +79,10 @@ public class PortListActivity extends BaseActivity {
 
     private void initView() {
         mAdapter = new Adapter(this.getSupportFragmentManager());
-        for (int i = 0; i < portResults.size(); i++) {
-            mAdapter.addFragment(getFragment(portResults.get(i).getId()), portResults.get(i).getName());
-        }
+//        for (int i = 0; i < portResults.size(); i++) {
+         mAdapter.addFragment(getFragment(""), "查验中");
+//        }
+        mAdapter.addFragment(getFragment(""), "其他");
         viewpager.setAdapter(mAdapter);
         viewpager.setOffscreenPageLimit(portResults.size());
         mAdapter.notifyDataSetChanged();
