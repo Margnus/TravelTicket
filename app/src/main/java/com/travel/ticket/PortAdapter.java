@@ -20,11 +20,16 @@ import com.travel.ticket.util.AccountUtil;
 import com.travel.ticket.util.DebugUtil;
 import com.travel.ticket.util.HttpClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -207,6 +212,18 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
             @Override
             public void onFailed(Throwable e) {
                 dismiss();
+                if (e != null && e instanceof HttpException) {
+                    try {
+                        String error = ((HttpException) e).response().errorBody().string();
+                        JSONObject object = new JSONObject(error);
+                        DebugUtil.toast(mContext, object.getString("message"));
+                        return;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                 DebugUtil.toast(mContext, "网络连接失败，请检查网络设置~");
             }
 
@@ -245,6 +262,18 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
             @Override
             public void onFailed(Throwable e) {
                 dismiss();
+                if (e != null && e instanceof HttpException) {
+                    try {
+                        String error = ((HttpException) e).response().errorBody().string();
+                        JSONObject object = new JSONObject(error);
+                        DebugUtil.toast(mContext, object.getString("message"));
+                        return;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                 DebugUtil.toast(mContext, "网络连接失败，请检查网络设置~");
             }
 
@@ -275,6 +304,18 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
             @Override
             public void onFailed(Throwable e) {
                 dismiss();
+                if (e != null && e instanceof HttpException) {
+                    try {
+                        String error = ((HttpException) e).response().errorBody().string();
+                        JSONObject object = new JSONObject(error);
+                        DebugUtil.toast(mContext, object.getString("message"));
+                        return;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                 DebugUtil.toast(mContext, "网络连接失败，请检查网络设置~");
             }
 
@@ -306,6 +347,18 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
             @Override
             public void onFailed(Throwable e) {
                 dismiss();
+                if (e != null && e instanceof HttpException) {
+                    try {
+                        String error = ((HttpException) e).response().errorBody().string();
+                        JSONObject object = new JSONObject(error);
+                        DebugUtil.toast(mContext, object.getString("message"));
+                        return;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                 DebugUtil.toast(mContext, "网络连接失败，请检查网络设置~");
             }
 

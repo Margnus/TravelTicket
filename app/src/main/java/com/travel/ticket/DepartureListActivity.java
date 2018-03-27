@@ -111,15 +111,17 @@ public class DepartureListActivity extends BaseActivity {
                     public void onFailed(Throwable e) {
                         dismiss();
                         swipeRefreshLayout.setRefreshing(false);
-                        try {
-                            String error = ((HttpException) e).response().errorBody().string();
-                            JSONObject object = new JSONObject(error);
-                            DebugUtil.toast(DepartureListActivity.this, object.getString("error_description"));
-                            return;
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
+                        if (e != null && e instanceof HttpException) {
+                            try {
+                                String error = ((HttpException) e).response().errorBody().string();
+                                JSONObject object = new JSONObject(error);
+                                DebugUtil.toast(DepartureListActivity.this, object.getString("message"));
+                                return;
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
                         }
                         DebugUtil.toast(DepartureListActivity.this, "网络连接失败，请检查网络设置~");
                     }
@@ -272,15 +274,17 @@ public class DepartureListActivity extends BaseActivity {
                     public void onFailed(Throwable e) {
                         dismiss();
                         swipeRefreshLayout.setRefreshing(false);
-                        try {
-                            String error = ((HttpException) e).response().errorBody().string();
-                            JSONObject object = new JSONObject(error);
-                            DebugUtil.toast(DepartureListActivity.this, object.getString("error_description"));
-                            return;
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
+                        if (e != null && e instanceof HttpException) {
+                            try {
+                                String error = ((HttpException) e).response().errorBody().string();
+                                JSONObject object = new JSONObject(error);
+                                DebugUtil.toast(DepartureListActivity.this, object.getString("message"));
+                                return;
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
                         }
                         DebugUtil.toast(DepartureListActivity.this, "网络连接失败，请检查网络设置~");
                     }
@@ -489,6 +493,18 @@ public class DepartureListActivity extends BaseActivity {
                         if (e instanceof RoleException) {
                             showRoleDialog();
                         } else {
+                            if (e != null && e instanceof HttpException) {
+                                try {
+                                    String error = ((HttpException) e).response().errorBody().string();
+                                    JSONObject object = new JSONObject(error);
+                                    DebugUtil.toast(DepartureListActivity.this, object.getString("message"));
+                                    return;
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                } catch (JSONException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
                             DebugUtil.toast(DepartureListActivity.this, "网络连接失败，请检查网络设置~");
                         }
                     }
@@ -624,8 +640,6 @@ public class DepartureListActivity extends BaseActivity {
                     DebugUtil.toast(DepartureListActivity.this, "内容为空");
                 } else {
                     // ScanResult 为 获取到的字符串
-
-                    DebugUtil.toast(DepartureListActivity.this, "扫描成功 ==> " + scanResult);
                     ticketOn(scanResult);
                 }
             }
