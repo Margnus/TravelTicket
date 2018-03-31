@@ -99,12 +99,16 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
         }
 
         shipName.setCompoundDrawablesWithIntrinsicBounds(item.isLoop() ? R.drawable.ic_loop : 0, 0, 0, 0);
+        helper.getView(R.id.sailing).setEnabled(true);
         switch (item.getSailingStatus()) {
             case "stay":
                 helper.setVisible(R.id.checkin, true);
                 helper.setVisible(R.id.sailing, false);
                 helper.setText(R.id.checkin, "查验");
                 helper.setText(R.id.status, "待发航");
+                if(!item.getCanChecking()){
+                    helper.getView(R.id.sailing).setEnabled(false);
+                }
                 break;
             case "checking":
                 helper.setVisible(R.id.checkin, true);

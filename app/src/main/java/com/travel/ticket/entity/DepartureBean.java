@@ -64,6 +64,16 @@ public class DepartureBean implements Serializable{
     private int adultCheckIn;
     @SerializedName("childCheckIn")
     private int childCheckIn;
+    @SerializedName("canChecking")
+    private boolean canChecking;
+
+    public boolean getCanChecking() {
+        return canChecking;
+    }
+
+    public void setCanChecking(boolean canChecking) {
+        this.canChecking = canChecking;
+    }
 
     public int getAdultCheckIn() {
         return adultCheckIn;

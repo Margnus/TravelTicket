@@ -13,6 +13,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,19 +76,31 @@ public class DepartureListActivity extends BaseActivity {
 
     @BindView(R.id.spinner)
     Spinner spinner;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.checked_num)
     TextView checkedNum;
 
-    PortAdapter portAdapter;
-    LinearLayoutManager mLinearLayoutManager;
     List<DepartureBean> departureBeans;
     Map<String, List<DepartureBean>> maps = new HashMap<>();
     List<String> ports = new ArrayList<>();
     MineResult mineResult;
+
+    /**
+     * tabs
+     */
+    @BindView(R.id.tabs)
+    TabLayout tabs;
+    /**
+     * viewpager
+     */
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
+
+    /**
+     * viewpage的 adapter
+     */
+    private PortListActivity.Adapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +108,7 @@ public class DepartureListActivity extends BaseActivity {
         setContentView(R.layout.activity_departures);
         ButterKnife.bind(this);
         initView();
+        initViewPager();
         getMe();
 //        getDeparture(true);
         getMyCorps();
@@ -208,10 +226,6 @@ public class DepartureListActivity extends BaseActivity {
                 getDeparture(false);
             }
         });
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLinearLayoutManager);
-        portAdapter = new PortAdapter(this, handler);
-        recyclerView.setAdapter(portAdapter);
     }
 
     ArrayAdapter<String> adapter;
@@ -226,15 +240,21 @@ public class DepartureListActivity extends BaseActivity {
                 public void onItemSelected(AdapterView<?> parent, View view,
                                            int pos, long id) {
                     List<DepartureBean> list = maps.get(ports.get(pos));
+                    List<DepartureBean> checkList = new ArrayList<>();
+                    List<DepartureBean> otherList = new ArrayList<>();
                     int count = 0, child = 0;
                     for (DepartureBean bean : list) {
                         count += bean.getCheckIn();
                         child += bean.getChildCheckIn();
+                        if("checking".equalsIgnoreCase(bean.getSailingStatus())){
+                            checkList.add(bean);
+                        }else {
+                            otherList.add(bean);
+                        }
                     }
                     checkedNum.setText(getString(R.string.checked_num, count, child));
-                    portAdapter.getData().clear();
-                    portAdapter.getData().addAll(list);
-                    portAdapter.notifyDataSetChanged();
+                    checkFragment.setDate(checkList);
+                    otherFragment.setDate(otherList);
                 }
 
                 @Override
@@ -246,15 +266,21 @@ public class DepartureListActivity extends BaseActivity {
             adapter.notifyDataSetChanged();
 
             List<DepartureBean> list = maps.get(ports.get(spinner.getSelectedItemPosition()));
+            List<DepartureBean> checkList = new ArrayList<>();
+            List<DepartureBean> otherList = new ArrayList<>();
             int count = 0, child = 0;
             for (DepartureBean bean : list) {
                 count += bean.getCheckIn();
                 child += bean.getChildCheckIn();
+                if("checking".equalsIgnoreCase(bean.getSailingStatus())){
+                    checkList.add(bean);
+                }else {
+                    otherList.add(bean);
+                }
             }
             checkedNum.setText(getString(R.string.checked_num, count, child));
-            portAdapter.getData().clear();
-            portAdapter.getData().addAll(list);
-            portAdapter.notifyDataSetChanged();
+            checkFragment.setDate(checkList);
+            otherFragment.setDate(otherList);
         }
     }
 
@@ -418,6 +444,7 @@ public class DepartureListActivity extends BaseActivity {
                         String error = ((HttpException) e).response().errorBody().string();
                         JSONObject object = new JSONObject(error);
                         showTicketOnDialog(object.getString("message"));
+                        getDeparture(false);
                         return;
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -662,5 +689,53 @@ public class DepartureListActivity extends BaseActivity {
         unregisterReceiver(scanReceiver);    //反注册广播接收者
         scanner.continceScan(false);
     }
+
+    private ShipListFragment checkFragment;
+    private ShipListFragment otherFragment;
+
+    private void initViewPager() {
+        mAdapter = new PortListActivity.Adapter(this.getSupportFragmentManager());
+        checkFragment = new ShipListFragment();
+        checkFragment.setHandler(handler);
+        otherFragment = new ShipListFragment();
+        otherFragment.setHandler(handler);
+        mAdapter.addFragment(checkFragment, "查验中");
+        mAdapter.addFragment(otherFragment, "其他");
+        viewpager.setAdapter(mAdapter);
+        viewpager.setOffscreenPageLimit(2);
+        mAdapter.notifyDataSetChanged();
+        tabs.setTabMode(TabLayout.MODE_FIXED);
+        tabs.setupWithViewPager(viewpager);
+    }
+
+    protected static class Adapter extends FragmentPagerAdapter {
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<CharSequence> titles = new ArrayList<>();
+
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void addFragment(Fragment fragment, CharSequence title) {
+            fragments.add(fragment);
+            titles.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
+        }
+    }
+
 }
 

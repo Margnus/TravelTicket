@@ -15,9 +15,9 @@ public class StringBean implements Serializable {
      * msg : string
      */
 
-    @SerializedName("code")
+    @SerializedName("status")
     private String code;
-    @SerializedName("msg")
+    @SerializedName("message")
     private String msg;
 
     public String getCode() {
