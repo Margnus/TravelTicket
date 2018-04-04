@@ -50,6 +50,11 @@ public class CheckListFragment extends BaseFragment {
         if (!list.isEmpty()) {
             adapter.getData().add(departureBeans.get(0));
         }
+        if(departureBeans.size() > 1){
+            expand.setVisibility(View.VISIBLE);
+        }else{
+            expand.setVisibility(View.GONE);
+        }
         adapter.notifyDataSetChanged();
         expand.setText(R.string.more);
     }
