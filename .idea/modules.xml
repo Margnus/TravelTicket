@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TravelTickets.iml" filepath="$PROJECT_DIR$/TravelTickets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TravelTicket.iml" filepath="$PROJECT_DIR$/TravelTicket.iml" />
+      <module fileurl="file://E:\workspace\TravelTicket\TravelTickets.iml" filepath="E:\workspace\TravelTicket\TravelTickets.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/http/http.iml" filepath="$PROJECT_DIR$/library/http/http.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />

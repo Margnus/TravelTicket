@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">两江游票号验证</string>
     <string name="action_settings">设置</string>
-    <string name="capacity">客容: %d</string>
+    <string name="capacity">定额: %d</string>
     <string name="checked">已检成人: %d</string>
     <string name="checked_child">已检儿童: %d</string>
     <string name="sale">已售: %d</string>
     <string name="logout">退出</string>
     <string name="checked_num">已检合计：%1$d (儿童：%2$d)</string>
     <string name="app_title">重庆两江游验票终端</string>
+    <string name="expand">收起</string>
+    <string name="more">查看更多</string>
 </resources>

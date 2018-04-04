@@ -690,12 +690,12 @@ public class DepartureListActivity extends BaseActivity {
         scanner.continceScan(false);
     }
 
-    private ShipListFragment checkFragment;
+    private CheckListFragment checkFragment;
     private ShipListFragment otherFragment;
 
     private void initViewPager() {
         mAdapter = new PortListActivity.Adapter(this.getSupportFragmentManager());
-        checkFragment = new ShipListFragment();
+        checkFragment = new CheckListFragment();
         checkFragment.setHandler(handler);
         otherFragment = new ShipListFragment();
         otherFragment.setHandler(handler);
