@@ -44,11 +44,16 @@ public class CheckListFragment extends BaseFragment {
     private List<DepartureBean> departureBeans;
 
     public void setDate(List<DepartureBean> list) {
-        showMore = true;
         departureBeans = list;
         adapter.getData().clear();
         if (!list.isEmpty()) {
-            adapter.getData().add(departureBeans.get(0));
+            if(showMore){
+                adapter.getData().addAll(departureBeans);
+                expand.setText(R.string.expand);
+            }else{
+                adapter.getData().add(departureBeans.get(0));
+                expand.setText(R.string.more);
+            }
         }
         if(departureBeans.size() > 1){
             expand.setVisibility(View.VISIBLE);
@@ -56,7 +61,7 @@ public class CheckListFragment extends BaseFragment {
             expand.setVisibility(View.GONE);
         }
         adapter.notifyDataSetChanged();
-        expand.setText(R.string.more);
+
     }
 
     @Nullable
@@ -95,17 +100,17 @@ public class CheckListFragment extends BaseFragment {
     public void onViewClicked() {
         if(showMore){
             showMore = false;
-            expand.setText(R.string.expand);
-            adapter.getData().clear();
-            adapter.getData().addAll(departureBeans);
-            adapter.notifyDataSetChanged();
-        }else{
-            showMore = true;
             expand.setText(R.string.more);
             adapter.getData().clear();
             if (!departureBeans.isEmpty()) {
                 adapter.getData().add(departureBeans.get(0));
             }
+            adapter.notifyDataSetChanged();
+        }else{
+            showMore = true;
+            expand.setText(R.string.expand);
+            adapter.getData().clear();
+            adapter.getData().addAll(departureBeans);
             adapter.notifyDataSetChanged();
         }
     }
