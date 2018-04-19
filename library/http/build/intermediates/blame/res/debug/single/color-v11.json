@@ -1,18 +1,10 @@
 [
     {
-        "merged": "F:\\workspaces\\TravelTickets\\library\\http\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\bbe470f206901fc1a929187ccd7ee54311684309\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
+        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
+        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
     },
     {
-        "merged": "F:\\workspaces\\TravelTickets\\library\\http\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\bbe470f206901fc1a929187ccd7ee54311684309\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
-    },
-    {
-        "merged": "F:\\workspaces\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\bbe470f206901fc1a929187ccd7ee54311684309\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
-    },
-    {
-        "merged": "F:\\workspaces\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\bbe470f206901fc1a929187ccd7ee54311684309\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
+        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
+        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
     }
 ]

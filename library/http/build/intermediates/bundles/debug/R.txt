@@ -574,14 +574,14 @@ int id multiply 0x7f0a0014
 int id never 0x7f0a0020
 int id none 0x7f0a000e
 int id normal 0x7f0a000a
-int id notification_background 0x7f0a0064
+int id notification_background 0x7f0a0065
 int id notification_main_column 0x7f0a005f
 int id notification_main_column_container 0x7f0a005e
 int id parentPanel 0x7f0a0030
 int id progress_circular 0x7f0a0005
 int id progress_horizontal 0x7f0a0006
 int id radio 0x7f0a0040
-int id right_icon 0x7f0a0065
+int id right_icon 0x7f0a0064
 int id right_side 0x7f0a0060
 int id screen 0x7f0a0015
 int id scrollIndicatorDown 0x7f0a0036

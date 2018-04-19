@@ -3,7 +3,7 @@
     package="com.example.http.test" >
 
     <uses-sdk
-        android:minSdkVersion="19"
+        android:minSdkVersion="14"
         android:targetSdkVersion="25" />
 
     <instrumentation

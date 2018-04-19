@@ -39,6 +39,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.travel.ticket.entity.DepartureBean;
 import com.travel.ticket.entity.MineResult;
 import com.travel.ticket.entity.MyCorpsResult;
+import com.travel.ticket.entity.PortResult;
 import com.travel.ticket.entity.StringBean;
 import com.travel.ticket.entity.UpdateResult;
 import com.travel.ticket.http.AuthObserver;
@@ -288,7 +289,23 @@ public class DepartureListActivity extends BaseActivity {
         if (showDialog) {
             showDialog();
         }
-        Subscription subscription = HttpClient.Builder.getTravelService().getDeparture().subscribeOn(Schedulers.io())
+        Subscription subscription = HttpClient.Builder.getTravelService().docker()
+                .concatMap(new Func1<List<PortResult>, Observable<List<DepartureBean>>>() {
+                    @Override
+                    public Observable<List<DepartureBean>> call(List<PortResult> portResults) {
+                        if(portResults != null && !portResults.isEmpty()){
+                            ports.clear();
+                            maps.clear();
+                            for(PortResult result:portResults){
+                                List<DepartureBean> list = new ArrayList<>();
+                                maps.put(result.getName(), list);
+                                ports.add(result.getName());
+                            }
+                        }
+                        return HttpClient.Builder.getTravelService().getDeparture();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new AuthObserver<List<DepartureBean>>() {
                     @Override
                     public void onCompleted() {
@@ -339,8 +356,8 @@ public class DepartureListActivity extends BaseActivity {
      * 筛选码头
      */
     private void shortData() {
-        ports.clear();
-        maps.clear();
+//        ports.clear();
+//        maps.clear();
         for (DepartureBean bean : departureBeans) {
             if (maps.containsKey(bean.getDocker().getName())) {
                 maps.get(bean.getDocker().getName()).add(bean);
@@ -498,9 +515,23 @@ public class DepartureListActivity extends BaseActivity {
                         }
                         throw new RoleException();
                     }
-                }).flatMap(new Func1<MineResult, Observable<List<DepartureBean>>>() {
+                }).flatMap(new Func1<MineResult, Observable<List<PortResult>>>() {
                     @Override
-                    public Observable<List<DepartureBean>> call(MineResult mineResult) {
+                    public Observable<List<PortResult>> call(MineResult mineResult) {
+                        return HttpClient.Builder.getTravelService().docker();
+                    }
+                }).concatMap(new Func1<List<PortResult>, Observable<List<DepartureBean>>>() {
+                    @Override
+                    public Observable<List<DepartureBean>> call(List<PortResult> portResults) {
+                        if(portResults != null && !portResults.isEmpty()){
+                            ports.clear();
+                            maps.clear();
+                            for(PortResult result:portResults){
+                                List<DepartureBean> list = new ArrayList<>();
+                                maps.put(result.getName(), list);
+                                ports.add(result.getName());
+                            }
+                        }
                         return HttpClient.Builder.getTravelService().getDeparture();
                     }
                 })

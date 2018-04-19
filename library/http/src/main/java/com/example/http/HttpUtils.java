@@ -41,6 +41,7 @@ public class HttpUtils {
     private Interceptor mInterceptor;
 
     private final static String API_TRAVEL = "http://travel.5det.com/";
+//    private final static String API_TRAVEL = "http://219.153.43.10:444/";
 //    private final static String API_TRAVEL = "https://ljy.3xylly.com/";
     /**
      * 分页数据，每页的数量
