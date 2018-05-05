@@ -3,7 +3,7 @@
     <color name="colorPrimary">#f08336</color>
     <color name="colorPrimaryDark">#ff7200</color>
     <color name="colorAccent">#ce0200</color>
-    <color name="black">#000000</color>
+    <color name="black">#4A4A4A</color>
     <color name="white">#ffffff</color>
     <color name="trans">#aaf08336</color>
 
@@ -14,7 +14,7 @@
     <color name="looper_5">#ce0200</color>
     <color name="looper_6">#1E80D0</color>
     <color name="looper_7">#64b9fa</color>
-    <color name="looper_8">#db3434</color>
+    <color name="looper_8">#d0021b</color>
     <color name="looper_9">#ffd085</color>
     <color name="looper_10">#e58283</color>
     <color name="looper_11">#f08336</color>

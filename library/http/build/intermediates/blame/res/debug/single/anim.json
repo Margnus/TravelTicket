@@ -1,42 +1,42 @@
 [
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_slide_out_top.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_popup_exit.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_slide_out_bottom.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_popup_enter.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_popup_enter.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_fade_in.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_slide_out_top.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_fade_out.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_slide_out_bottom.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_fade_in.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_slide_in_bottom.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_popup_exit.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_slide_in_top.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_slide_in_bottom.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\anim\\abc_fade_out.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
     }
 ]

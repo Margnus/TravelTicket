@@ -19,21 +19,24 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.travel.ticket.entity.DepartureBean;
@@ -59,11 +62,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -177,6 +177,7 @@ public class DepartureListActivity extends BaseActivity {
     ScannerInterface scanner;
     IntentFilter intentFilter;
     BroadcastReceiver scanReceiver;
+    Toast toast;
 
     private static final String RES_ACTION = "android.intent.action.SCANRESULT";
 
@@ -227,8 +228,8 @@ public class DepartureListActivity extends BaseActivity {
                 getDeparture(false);
             }
         });
-    }
 
+    }
     ArrayAdapter<String> adapter;
 
     private void initSpinner(String[] mItems) {
@@ -420,14 +421,6 @@ public class DepartureListActivity extends BaseActivity {
         builder.create().show();
     }
 
-    @OnClick(R.id.image)
-    public void onViewClicked() {
-        new IntentIntegrator(this)
-                .setOrientationLocked(false)
-                .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是ScanActivity
-                .initiateScan(); // 初始化扫描
-    }
-
     @Override
 // 通过 onActivityResult的方法获取扫描回来的值
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -460,7 +453,7 @@ public class DepartureListActivity extends BaseActivity {
                     try {
                         String error = ((HttpException) e).response().errorBody().string();
                         JSONObject object = new JSONObject(error);
-                        showTicketOnDialog(object.getString("message"));
+                        showTicketOnDialog(object.getString("message"), R.drawable.ic_wrong, R.color.looper_8);
                         getDeparture(false);
                         return;
                     } catch (IOException e1) {
@@ -469,7 +462,7 @@ public class DepartureListActivity extends BaseActivity {
                         e1.printStackTrace();
                     }
                 }
-                showTicketOnDialog("网络连接失败，请检查网络设置~");
+                DebugUtil.toast(DepartureListActivity.this, "网络连接失败，请检查网络设置~");
             }
 
             @Override
@@ -485,22 +478,34 @@ public class DepartureListActivity extends BaseActivity {
             public void onNext(StringBean result) {
                 if (result != null) {
                     getDeparture(false);
-                    showTicketOnDialog(result.getMsg());
+                    showTicketOnDialog(result.getMsg(), R.drawable.ic_right, R.color.looper_1);
                 }
             }
         });
     }
 
-    private void showTicketOnDialog(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("")
-        .setMessage(message)
-        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create().show();
+    private void showTicketOnDialog(String message, int drawable, int color) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("")
+//        .setMessage(message)
+//        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        }).create().show();
+        View view = LayoutInflater.from(this).inflate(R.layout.ticket_toast, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.toast_icon);
+        imageView.setImageResource(drawable);
+        TextView textView = (TextView) view.findViewById(R.id.toast_tv);
+        textView.setText(message);
+        textView.setTextColor(getResources().getColor(color));
+
+        toast = Toast.makeText(getApplicationContext(),
+                "", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setView(view);
+        toast.show();
     }
 
     public void getMe() {
@@ -694,9 +699,9 @@ public class DepartureListActivity extends BaseActivity {
             if (intent.getAction().equals(RES_ACTION)) {
                 //获取扫描结果
                 final String scanResult = intent.getStringExtra("value");
-                if (TextUtils.isEmpty(scanResult)) {
-                    DebugUtil.toast(DepartureListActivity.this, "内容为空");
-                } else {
+                if (!TextUtils.isEmpty(scanResult)) {
+//                    DebugUtil.toast(DepartureListActivity.this, "内容为空");
+//                } else {
                     // ScanResult 为 获取到的字符串
                     ticketOn(scanResult);
                 }
@@ -721,12 +726,12 @@ public class DepartureListActivity extends BaseActivity {
         scanner.continceScan(false);
     }
 
-    private CheckListFragment checkFragment;
+    private ShipListFragment checkFragment;
     private ShipListFragment otherFragment;
 
     private void initViewPager() {
         mAdapter = new PortListActivity.Adapter(this.getSupportFragmentManager());
-        checkFragment = new CheckListFragment();
+        checkFragment = new ShipListFragment();
         checkFragment.setHandler(handler);
         otherFragment = new ShipListFragment();
         otherFragment.setHandler(handler);

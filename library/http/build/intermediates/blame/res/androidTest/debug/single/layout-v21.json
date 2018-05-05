@@ -1,18 +1,18 @@
 [
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/androidTest/debug/layout-v21/notification_action.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/layout-v21/notification_action.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/androidTest/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/layout-v21/notification_template_custom_big.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/androidTest/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/layout-v21/notification_template_icon_group.xml"
     },
     {
-        "merged": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
-        "source": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\layout-v21\\notification_action.xml"
+        "merged": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/res/merged/androidTest/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/layout-v21/notification_action_tombstone.xml"
     }
 ]

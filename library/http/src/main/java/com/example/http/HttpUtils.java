@@ -161,7 +161,7 @@ public class HttpUtils {
 
     private HttpLoggingInterceptor getInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        if (debug) {
+        if (BuildConfig.DEBUG) {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 测试
         } else {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 打包

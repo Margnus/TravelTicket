@@ -76,24 +76,30 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
     @Override
     protected void convert(final BaseViewHolder helper, final DepartureBean item) {
         helper.setText(R.id.ship_name, item.getCruise().getName())
-                .setText(R.id.capacity, mContext.getString(R.string.capacity, item.getCapacity()))
-                .setText(R.id.check, mContext.getString(R.string.checked, item.getAdultCheckIn()))
-                .setText(R.id.check_child, mContext.getString(R.string.checked_child, item.getChildCheckIn()))
-                .setText(R.id.sale, mContext.getString(R.string.sale, item.getSold()));
+                .setText(R.id.capacity, "" + item.getCapacity())
+                .setText(R.id.check, "" + item.getAdultCheckIn())
+                .setText(R.id.check_child, "" + item.getChildCheckIn())
+                .setText(R.id.sale, "" + item.getSold());
         TextView shipName = helper.getView(R.id.ship_name);
         TextView time = helper.getView(R.id.time);
-        if(item.isLoop()){
-            String date = TextUtils.isEmpty(item.getDepartureTimeFrom()) ? "" : item.getDepartureTimeFrom().substring(11, 16) + "\n";
-            date += TextUtils.isEmpty(item.getDepartureTimeTo()) ? "" : item.getDepartureTimeTo().substring(11, 16);
-            time.setText(date);
-            if(map.containsKey(item.getCruisePlanId())){
+        TextView timeEnd = helper.getView(R.id.time_end);
+        if (item.isLoop()) {
+            helper.setVisible(R.id.time_end, true);
+            String start = TextUtils.isEmpty(item.getDepartureTimeFrom()) ? "" : item.getDepartureTimeFrom().substring(11, 16);
+            String end = TextUtils.isEmpty(item.getDepartureTimeTo()) ? "" : item.getDepartureTimeTo().substring(11, 16);
+            time.setText(start);
+            timeEnd.setText(end);
+            if (map.containsKey(item.getCruisePlanId())) {
                 time.setTextColor(mContext.getResources().getColor(map.get(item.getCruisePlanId())));
-            }else{
+                timeEnd.setTextColor(mContext.getResources().getColor(map.get(item.getCruisePlanId())));
+            } else {
                 int size = map.size();
                 map.put(item.getCruisePlanId(), res[size]);
                 time.setTextColor(mContext.getResources().getColor(res[size]));
+                timeEnd.setTextColor(mContext.getResources().getColor(res[size]));
             }
-        }else {
+        } else {
+            helper.setVisible(R.id.time_end, false);
             time.setText(item.getDepartureDate().substring(11, 16));
             time.setTextColor(mContext.getResources().getColor(R.color.black));
         }
@@ -106,7 +112,7 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
                 helper.setVisible(R.id.sailing, false);
                 helper.setText(R.id.checkin, "查验");
                 helper.setText(R.id.status, "待发航");
-                if(!item.getCanChecking()){
+                if (!item.getCanChecking()) {
                     helper.getView(R.id.checkin).setEnabled(false);
                 }
                 break;

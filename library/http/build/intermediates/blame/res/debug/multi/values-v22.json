@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "E:\\workspace\\TravelTicket\\library\\http\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v22\\values-v22.xml",
+        "outputFile": "/Users/lixiaofan/work/workspace/TravelTicket/library/http/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v22/values-v22.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 125
                 },
                 "from": {
-                    "file": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\values-v22\\values-v22.xml",
+                    "file": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/values-v22/values-v22.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 212
                 },
                 "from": {
-                    "file": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\values-v22\\values-v22.xml",
+                    "file": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/values-v22/values-v22.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -50,7 +50,7 @@
                     "endOffset": 548
                 },
                 "from": {
-                    "file": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\values-v22\\values-v22.xml",
+                    "file": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/values-v22/values-v22.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -71,7 +71,7 @@
                     "endOffset": 896
                 },
                 "from": {
-                    "file": "C:\\Users\\李小凡\\.android\\build-cache\\66f7de6ce0c829ccb13a8f94bae98aaba1cd7fcb\\output\\res\\values-v22\\values-v22.xml",
+                    "file": "/Users/lixiaofan/.android/build-cache/f6becbbb8696c132abc087eac43ad08729f33b3b/output/res/values-v22/values-v22.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
