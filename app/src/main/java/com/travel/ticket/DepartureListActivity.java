@@ -62,6 +62,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Subscription;
@@ -478,7 +479,7 @@ public class DepartureListActivity extends BaseActivity {
             public void onNext(StringBean result) {
                 if (result != null) {
                     getDeparture(false);
-                    showTicketOnDialog(result.getMsg(), R.drawable.ic_right, R.color.looper_1);
+                    showTicketOnDialog(result.getMsg(), R.drawable.ic_right, R.color.looper_13);
                 }
             }
         });
@@ -742,6 +743,14 @@ public class DepartureListActivity extends BaseActivity {
         mAdapter.notifyDataSetChanged();
         tabs.setTabMode(TabLayout.MODE_FIXED);
         tabs.setupWithViewPager(viewpager);
+    }
+
+    @OnClick(R.id.image)
+    public void onViewClicked() {
+        new IntentIntegrator(this)
+                .setOrientationLocked(false)
+                .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是ScanActivity
+                .initiateScan(); // 初始化扫描
     }
 
     protected static class Adapter extends FragmentPagerAdapter {
