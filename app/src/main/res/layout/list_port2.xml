@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="10:00"/>
+
+    <TextView
+        android:id="@+id/ship_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/time"
+        android:layout_marginRight="100dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_loop"
+        android:drawablePadding="@dimen/dp_4"
+        android:text="铁塔尼号"/>
+
+    <TextView
+        android:id="@+id/capacity"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/looper_8"
+        android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="@string/capacity"/>
+
+    <TextView
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ship_name"
+        android:layout_toRightOf="@+id/time"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="@string/checked"/>
+
+    <TextView
+        android:id="@+id/sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/check"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/ship_name"
+        android:layout_alignBaseline="@id/check"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="@string/sale"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/ship_name"
+        android:layout_alignBaseline="@id/check"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+
+    <!--<ProgressBar-->
+    <!--android:id="@+id/progressbar"-->
+    <!--style="?android:attr/progressBarStyleHorizontal"-->
+    <!--android:layout_toRightOf="@+id/time"-->
+    <!--android:layout_below="@id/check"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="6dp"-->
+    <!--android:max="100"-->
+    <!--android:progress="50"-->
+    <!--android:progressDrawable="@drawable/shape_progressbar" />-->
+
+    <TextView
+        android:id="@+id/check_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/check"
+        android:layout_toRightOf="@+id/time"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="@string/checked"/>
+
+
+    <TextView
+        android:id="@+id/sailing"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/check_child"
+        android:gravity="center"
+        android:background="@drawable/btn_selector"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="发航"/>
+
+    <TextView
+        android:id="@+id/checkin"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/check_child"
+        android:layout_toLeftOf="@+id/sailing"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:background="@drawable/btn_selector"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="查验"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/divider"/>
+
+</RelativeLayout>

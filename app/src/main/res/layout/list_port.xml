@@ -11,7 +11,7 @@
         android:id="@+id/ship_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/ic_loop"
         android:drawablePadding="5dp"
         android:gravity="center"
@@ -29,7 +29,7 @@
             android:layout_width="1px"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:background="@drawable/shape_line_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -38,10 +38,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="2dp"
                 android:text="10:00"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,10 +56,10 @@
                 android:id="@+id/time_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="2dp"
                 android:text="10:00"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
 
@@ -69,7 +69,7 @@
             android:layout_width="1px"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -89,7 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:gravity="left"
+                    android:gravity="right"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:textColor="@color/looper_8"
                     android:textSize="20sp" />
@@ -114,7 +115,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:gravity="left"
+                    android:gravity="right"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:textColor="@color/looper_8"
                     android:textSize="20sp" />
@@ -138,7 +140,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:gravity="left"
+                    android:gravity="right"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:textColor="@color/looper_8"
                     android:textSize="20sp" />
@@ -162,7 +165,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:gravity="left"
+                    android:gravity="right"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:textColor="@color/looper_8"
                     android:textSize="20sp" />
@@ -195,6 +199,7 @@
             android:layout_width="1dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/btn_selector"
             android:gravity="center"
             android:text="发航"

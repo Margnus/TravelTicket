@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,12 +25,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.adapter.rxjava.HttpException;
-import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -39,7 +35,7 @@ import rx.schedulers.Schedulers;
  * Created by lixiaofan on 2018/2/3.
  */
 
-public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder> {
+public class PortAdapter2 extends BaseQuickAdapter<DepartureBean, BaseViewHolder> {
 
     private ProgressDialog dialog;
     Activity mActivity;
@@ -62,8 +58,8 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
 
     // 班次状态 = ['sailing', 'stay', 'checking', 'end']
 
-    public PortAdapter(Activity activity, Handler handler) {
-        super(R.layout.list_port, new ArrayList<DepartureBean>());
+    public PortAdapter2(Activity activity, Handler handler) {
+        super(R.layout.list_port2, new ArrayList<DepartureBean>());
         this.handler = handler;
         mActivity = activity;
     }
@@ -76,30 +72,24 @@ public class PortAdapter extends BaseQuickAdapter<DepartureBean, BaseViewHolder>
     @Override
     protected void convert(final BaseViewHolder helper, final DepartureBean item) {
         helper.setText(R.id.ship_name, item.getCruise().getName())
-                .setText(R.id.capacity, "" + item.getCapacity())
-                .setText(R.id.check, "" + item.getAdultCheckIn())
-                .setText(R.id.check_child, "" + item.getChildCheckIn())
-                .setText(R.id.sale, "" + item.getSold());
+                .setText(R.id.capacity, mContext.getString(R.string.capacity2, item.getCapacity()))
+                .setText(R.id.check, mContext.getString(R.string.checked2, item.getCheckIn()))
+                .setText(R.id.check_child, mContext.getString(R.string.checked_child2, item.getChildCheckIn()))
+                .setText(R.id.sale, mContext.getString(R.string.sale2, item.getSold()));
         TextView shipName = helper.getView(R.id.ship_name);
         TextView time = helper.getView(R.id.time);
-        TextView timeEnd = helper.getView(R.id.time_end);
-        if (item.isLoop()) {
-            helper.setVisible(R.id.time_end, true);
-            String start = TextUtils.isEmpty(item.getDepartureTimeFrom()) ? "" : item.getDepartureTimeFrom().substring(11, 16);
-            String end = TextUtils.isEmpty(item.getDepartureTimeTo()) ? "" : item.getDepartureTimeTo().substring(11, 16);
-            time.setText(start);
-            timeEnd.setText(end);
-            if (map.containsKey(item.getCruisePlanId())) {
+        if(item.isLoop()){
+            String date = TextUtils.isEmpty(item.getDepartureTimeFrom()) ? "" : item.getDepartureTimeFrom().substring(11, 16) + "\n";
+            date += TextUtils.isEmpty(item.getDepartureTimeTo()) ? "" : item.getDepartureTimeTo().substring(11, 16);
+            time.setText(date);
+            if(map.containsKey(item.getCruisePlanId())){
                 time.setTextColor(mContext.getResources().getColor(map.get(item.getCruisePlanId())));
-                timeEnd.setTextColor(mContext.getResources().getColor(map.get(item.getCruisePlanId())));
-            } else {
+            }else{
                 int size = map.size();
                 map.put(item.getCruisePlanId(), res[size]);
                 time.setTextColor(mContext.getResources().getColor(res[size]));
-                timeEnd.setTextColor(mContext.getResources().getColor(res[size]));
             }
-        } else {
-            helper.setVisible(R.id.time_end, false);
+        }else {
             time.setText(item.getDepartureDate().substring(11, 16));
             time.setTextColor(mContext.getResources().getColor(R.color.black));
         }

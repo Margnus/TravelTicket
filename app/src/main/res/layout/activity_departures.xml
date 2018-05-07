@@ -83,6 +83,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="40dp"
+        android:visibility="visible"
         android:background="@drawable/shape_camera"
         android:layout_gravity="bottom|right">
 

@@ -676,6 +676,7 @@ public class DepartureListActivity extends BaseActivity {
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 139 && event.getRepeatCount() == 0) {
+            if(toast != null) toast.cancel();
             scanner.scan_start();
         }
         return super.onKeyDown(keyCode, event);
@@ -728,13 +729,13 @@ public class DepartureListActivity extends BaseActivity {
     }
 
     private ShipListFragment checkFragment;
-    private ShipListFragment otherFragment;
+    private OtherListFragment otherFragment;
 
     private void initViewPager() {
         mAdapter = new PortListActivity.Adapter(this.getSupportFragmentManager());
         checkFragment = new ShipListFragment();
         checkFragment.setHandler(handler);
-        otherFragment = new ShipListFragment();
+        otherFragment = new OtherListFragment();
         otherFragment.setHandler(handler);
         mAdapter.addFragment(checkFragment, "查验中");
         mAdapter.addFragment(otherFragment, "其他");
