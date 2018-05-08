@@ -73,7 +73,7 @@ public class PortAdapter2 extends BaseQuickAdapter<DepartureBean, BaseViewHolder
     protected void convert(final BaseViewHolder helper, final DepartureBean item) {
         helper.setText(R.id.ship_name, item.getCruise().getName())
                 .setText(R.id.capacity, mContext.getString(R.string.capacity2, item.getCapacity()))
-                .setText(R.id.check, mContext.getString(R.string.checked2, item.getCheckIn()))
+                .setText(R.id.check, mContext.getString(R.string.checked2, item.getAdultCheckIn()))
                 .setText(R.id.check_child, mContext.getString(R.string.checked_child2, item.getChildCheckIn()))
                 .setText(R.id.sale, mContext.getString(R.string.sale2, item.getSold()));
         TextView shipName = helper.getView(R.id.ship_name);
